@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #1a221c;
+  --ink-soft: #3a453e;
+  --muted: #6b756e;
+  --paper: #e7ebe4;
+  --paper-deep: #d5ddd0;
+  --panel: #f3f5f0;
+  --line: rgba(26, 34, 28, 0.12);
+  --accent: #9a5b32;
+  --accent-soft: #c4784a;
+  --atmosphere-a: #c5d4c8;
+  --atmosphere-b: #dcc9b0;
+  --atmosphere-c: #b8c9c4;
+}
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-body-family);
+  --font-display: var(--font-display-family);
+  --font-mono: var(--font-mono-family);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body-family), Georgia, serif;
+  min-height: 100%;
+}
+
+/* Soft laboratory wash — not flat, not purple */
+.atmosphere {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 120%;
+  background:
+    radial-gradient(ellipse 70% 55% at 12% 20%, var(--atmosphere-a), transparent 60%),
+    radial-gradient(ellipse 55% 50% at 88% 10%, var(--atmosphere-b), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 55% 60%, var(--atmosphere-c), transparent 50%);
+  opacity: 0.85;
+  animation: drift 22s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2%, 3%, 0) scale(1.04);
+  }
+}
+
+.brand-title {
+  text-wrap: balance;
+}
+
+.periodic-grid {
+  display: grid;
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+  grid-template-rows: repeat(10, auto);
+  gap: clamp(2px, 0.35vw, 5px);
+}
+
+.detail-shell {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 2px;
+  overflow: hidden;
+  animation: panel-in 0.45s ease-out;
+}
+
+.detail-panel {
+  background: var(--panel);
+  min-height: 520px;
+}
+
+.atom-stage {
+  border: 1px solid var(--line);
+  background: #12181f;
+}
+
+.section-label {
+  font-family: var(--font-mono-family), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.element-cell:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px) scale(1.04);
+  z-index: 3;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.7s ease-out 0.12s both;
+}
+
+.animate-table {
+  animation: fade-up 0.85s ease-out 0.2s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere,
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-table,
+  .detail-shell {
+    animation: none !important;
+  }
+
+  .element-cell:hover {
+    transform: none;
+  }
+}
