@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #1a221c;
-  --ink-soft: #3a453e;
-  --muted: #6b756e;
-  --paper: #e7ebe4;
-  --paper-deep: #d5ddd0;
-  --panel: #f3f5f0;
-  --line: rgba(26, 34, 28, 0.12);
-  --accent: #9a5b32;
+  --ink: #1c2420;
+  --ink-soft: #3d4741;
+  --muted: #6e7872;
+  --paper: #f7f8f6;
+  --paper-deep: #eceeea;
+  --panel: #ffffff;
+  --line: rgba(28, 36, 32, 0.1);
+  --accent: #8b5330;
   --accent-soft: #c4784a;
-  --atmosphere-a: #c5d4c8;
-  --atmosphere-b: #dcc9b0;
-  --atmosphere-c: #b8c9c4;
+  --atmosphere-a: #dde8e2;
+  --atmosphere-b: #ebe3d6;
+  --atmosphere-c: #d8e4e2;
 }
 
 @theme inline {
@@ -38,17 +38,16 @@ body {
   min-height: 100%;
 }
 
-/* Soft laboratory wash — not flat, not purple */
 .atmosphere {
   position: absolute;
-  inset: -20% -10% auto -10%;
-  height: 120%;
+  inset: -40% -8% auto -8%;
+  height: 160%;
   background:
-    radial-gradient(ellipse 70% 55% at 12% 20%, var(--atmosphere-a), transparent 60%),
-    radial-gradient(ellipse 55% 50% at 88% 10%, var(--atmosphere-b), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 55% 60%, var(--atmosphere-c), transparent 50%);
-  opacity: 0.85;
-  animation: drift 22s ease-in-out infinite alternate;
+    radial-gradient(ellipse 60% 50% at 8% 30%, var(--atmosphere-a), transparent 55%),
+    radial-gradient(ellipse 45% 45% at 92% 0%, var(--atmosphere-b), transparent 50%),
+    radial-gradient(ellipse 40% 35% at 50% 80%, var(--atmosphere-c), transparent 45%);
+  opacity: 0.7;
+  animation: drift 24s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
@@ -57,7 +56,7 @@ body {
     transform: translate3d(0, 0, 0) scale(1);
   }
   to {
-    transform: translate3d(2%, 3%, 0) scale(1.04);
+    transform: translate3d(1.5%, 2%, 0) scale(1.03);
   }
 }
 
@@ -69,25 +68,41 @@ body {
   display: grid;
   grid-template-columns: repeat(18, minmax(0, 1fr));
   grid-template-rows: repeat(10, auto);
-  gap: clamp(2px, 0.35vw, 5px);
+  gap: clamp(2px, 0.3vw, 4px);
+  width: 100%;
+  min-width: 640px;
+}
+
+.table-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.table-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(28, 36, 32, 0.18);
+  border-radius: 99px;
 }
 
 .detail-shell {
   border: 1px solid var(--line);
   background: var(--panel);
-  border-radius: 2px;
-  overflow: hidden;
-  animation: panel-in 0.45s ease-out;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(28, 36, 32, 0.06);
 }
 
 .detail-panel {
   background: var(--panel);
-  min-height: 520px;
+  min-height: 100%;
 }
 
 .atom-stage {
   border: 1px solid var(--line);
   background: #12181f;
+  border-radius: 8px;
 }
 
 .section-label {
@@ -105,9 +120,9 @@ body {
   width: 2rem;
   height: 2rem;
   border: 1px solid var(--line);
+  border-radius: 6px;
   background: transparent;
   color: var(--ink-soft);
-  font-size: 0.85rem;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -117,24 +132,17 @@ body {
   border-color: var(--ink);
 }
 
-.element-cell:hover {
-  filter: brightness(1.08);
-  transform: translateY(-1px) scale(1.04);
-  z-index: 3;
+.element-cell:hover:not(.element-cell-selected) {
+  filter: brightness(0.97);
+  transform: translateY(-1px);
+  z-index: 2;
+}
+
+.element-cell-selected {
+  transform: scale(1.04);
 }
 
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes panel-in {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -145,28 +153,26 @@ body {
   }
 }
 
-.animate-fade-up {
-  animation: fade-up 0.7s ease-out both;
+@media (min-width: 900px) {
+  .periodic-grid {
+    min-width: 0;
+  }
 }
 
-.animate-fade-up-delay {
-  animation: fade-up 0.7s ease-out 0.12s both;
-}
-
-.animate-table {
-  animation: fade-up 0.85s ease-out 0.2s both;
+@media (max-width: 639px) {
+  .periodic-grid {
+    min-width: 720px;
+    gap: 3px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .atmosphere,
-  .animate-fade-up,
-  .animate-fade-up-delay,
-  .animate-table,
-  .detail-shell {
+  .atmosphere {
     animation: none !important;
   }
 
-  .element-cell:hover {
+  .element-cell:hover:not(.element-cell-selected),
+  .element-cell-selected {
     transform: none;
   }
 }

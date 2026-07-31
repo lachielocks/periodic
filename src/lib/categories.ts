@@ -14,34 +14,78 @@ export const categoryLabels: Record<ElementCategory, string> = {
   unknown: "Unknown",
 };
 
-/** Soft, museum-board palette — no neon purple glow */
+/** Soft pastel fills (Google table–inspired), dark readable type */
 export const categoryColors: Record<
   ElementCategory,
   { fill: string; text: string; glow: string }
 > = {
-  "alkali-metal": { fill: "#c45c4a", text: "#fff5f2", glow: "rgba(196,92,74,0.35)" },
-  "alkaline-earth": { fill: "#c48a3a", text: "#fff8ef", glow: "rgba(196,138,58,0.35)" },
-  "transition-metal": { fill: "#3d7a8c", text: "#f0f8fa", glow: "rgba(61,122,140,0.35)" },
-  "post-transition": { fill: "#4a8f7a", text: "#f0faf6", glow: "rgba(74,143,122,0.35)" },
-  metalloid: { fill: "#6b8f4e", text: "#f4faf0", glow: "rgba(107,143,78,0.35)" },
-  nonmetal: { fill: "#8a9e4a", text: "#f7faef", glow: "rgba(138,158,74,0.35)" },
-  halogen: { fill: "#5c9e6e", text: "#f0faf3", glow: "rgba(92,158,110,0.35)" },
-  "noble-gas": { fill: "#4a8f9e", text: "#eff8fa", glow: "rgba(74,143,158,0.35)" },
-  lanthanide: { fill: "#a66b5c", text: "#faf4f2", glow: "rgba(166,107,92,0.35)" },
-  actinide: { fill: "#8c6b7a", text: "#faf2f6", glow: "rgba(140,107,122,0.35)" },
-  unknown: { fill: "#6a6e72", text: "#f2f3f4", glow: "rgba(106,110,114,0.35)" },
+  "alkali-metal": {
+    fill: "#b7d4ea",
+    text: "#1a2a36",
+    glow: "rgba(100,150,180,0.4)",
+  },
+  "alkaline-earth": {
+    fill: "#f0c4c8",
+    text: "#3a1e24",
+    glow: "rgba(200,120,130,0.4)",
+  },
+  "transition-metal": {
+    fill: "#d4c8e4",
+    text: "#2a2238",
+    glow: "rgba(140,120,180,0.35)",
+  },
+  "post-transition": {
+    fill: "#c5e0c8",
+    text: "#1e3224",
+    glow: "rgba(100,160,110,0.35)",
+  },
+  metalloid: {
+    fill: "#efe4a8",
+    text: "#3a3418",
+    glow: "rgba(180,160,60,0.35)",
+  },
+  nonmetal: {
+    fill: "#a8d8e8",
+    text: "#1a3038",
+    glow: "rgba(80,150,180,0.35)",
+  },
+  halogen: {
+    fill: "#9fd4c4",
+    text: "#1a322c",
+    glow: "rgba(70,150,130,0.35)",
+  },
+  "noble-gas": {
+    fill: "#f0b8c0",
+    text: "#3a1e24",
+    glow: "rgba(200,110,120,0.35)",
+  },
+  lanthanide: {
+    fill: "#b0d0e8",
+    text: "#1a2a36",
+    glow: "rgba(90,140,180,0.35)",
+  },
+  actinide: {
+    fill: "#f0c8a8",
+    text: "#3a2818",
+    glow: "rgba(200,140,80,0.35)",
+  },
+  unknown: {
+    fill: "#d4d4d4",
+    text: "#2a2a2a",
+    glow: "rgba(120,120,120,0.3)",
+  },
 };
 
 export const categoryOrder: ElementCategory[] = [
   "alkali-metal",
   "alkaline-earth",
+  "lanthanide",
+  "actinide",
   "transition-metal",
   "post-transition",
   "metalloid",
   "nonmetal",
   "halogen",
   "noble-gas",
-  "lanthanide",
-  "actinide",
   "unknown",
 ];
