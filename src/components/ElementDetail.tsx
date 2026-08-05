@@ -7,8 +7,9 @@ import {
   X,
 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { categoryColors, categoryLabels } from "@/lib/categories";
+import { approximateNeutrons } from "@/lib/electrons";
 import { formatKelvin, formatMass } from "@/lib/layout";
 import type { ChemicalElement } from "@/types/element";
 
@@ -17,7 +18,7 @@ const AtomViewer = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full min-h-[200px] flex-col items-center justify-center gap-2 text-sm text-[var(--muted)]">
+      <div className="flex h-full min-h-[180px] flex-col items-center justify-center gap-2 text-sm text-[var(--muted)]">
         <Atom className="size-5 animate-pulse" aria-hidden />
         Assembling atom…
       </div>
@@ -41,16 +42,23 @@ export function ElementDetail({
   const colors = categoryColors[element.category];
   const [showMore, setShowMore] = useState(false);
 
+  const protons = element.atomicNumber;
+  const electrons = element.atomicNumber;
+  const neutrons = useMemo(
+    () => approximateNeutrons(element.atomicNumber, element.atomicMass),
+    [element.atomicNumber, element.atomicMass]
+  );
+
   const summary = element.funFact ?? element.description;
 
   return (
     <aside
-      className="detail-panel relative flex h-full flex-col overflow-hidden"
+      className="detail-panel relative flex h-full min-h-0 flex-col overflow-hidden"
       aria-label={`${element.name} details`}
     >
-      <header className="relative flex items-start justify-between gap-3 px-4 pb-3 pt-4 sm:px-5 sm:pt-5">
+      <header className="relative flex shrink-0 items-start justify-between gap-3 border-b border-[var(--line)] px-4 pb-3 pt-4 sm:px-5 sm:pt-5">
         <div className="min-w-0">
-          <h2 className="font-display text-[1.65rem] font-semibold leading-tight tracking-tight text-[var(--ink)] sm:text-3xl">
+          <h2 className="font-display text-[1.5rem] font-semibold leading-tight tracking-tight text-[var(--ink)] sm:text-[1.75rem]">
             {element.name}{" "}
             <span className="font-normal text-[var(--ink-soft)]">
               ({element.symbol})
@@ -92,7 +100,7 @@ export function ElementDetail({
         </div>
       </header>
 
-      <div className="relative flex-1 overflow-y-auto overscroll-contain px-4 pb-5 sm:px-5">
+      <div className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5">
         <div className="atom-stage mb-4 overflow-hidden rounded-md">
           <AtomViewer element={element} />
         </div>
@@ -106,6 +114,13 @@ export function ElementDetail({
           <PropRow
             label="Atomic mass"
             value={`${formatMass(element.atomicMass)} u`}
+          />
+          <PropRow label="Protons" value={String(protons)} />
+          <PropRow label="Electrons" value={String(electrons)} />
+          <PropRow label="Neutrons" value={`≈ ${neutrons}`} />
+          <PropRow
+            label="Electron configuration"
+            value={element.electronConfiguration}
           />
           <PropRow
             label="Density"
@@ -129,10 +144,6 @@ export function ElementDetail({
                 : "Ancient"
             }
           />
-          <PropRow
-            label="Electron config"
-            value={element.electronConfiguration}
-          />
         </dl>
 
         <button
@@ -148,7 +159,7 @@ export function ElementDetail({
         </button>
 
         {showMore && (
-          <div className="mt-4 space-y-4 border-t border-[var(--line)] pt-4">
+          <div className="mt-4 space-y-4 border-t border-[var(--line)] pt-4 pb-2">
             <div>
               <h3 className="section-label">About</h3>
               <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--ink-soft)]">
@@ -183,7 +194,9 @@ function PropRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline justify-between gap-4 py-2.5">
       <dt className="shrink-0 text-sm text-[var(--muted)]">{label}</dt>
-      <dd className="text-right font-mono text-sm text-[var(--ink)]">{value}</dd>
+      <dd className="text-right font-mono text-sm break-all text-[var(--ink)]">
+        {value}
+      </dd>
     </div>
   );
 }

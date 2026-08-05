@@ -80,27 +80,21 @@ export function PeriodicApp() {
   ) : null;
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[var(--paper)]">
-      <header className="relative shrink-0 px-4 pb-3 pt-5 sm:px-6 sm:pt-6 lg:px-8">
+    <div className="flex h-dvh max-h-dvh flex-col overflow-hidden bg-[var(--paper)]">
+      <header className="relative shrink-0 px-4 pb-2 pt-4 sm:px-6 sm:pt-5 lg:px-8">
         <div className="atmosphere" aria-hidden />
-        <div className="relative mx-auto flex max-w-[1500px] items-end justify-between gap-4">
-          <div>
-            <h1 className="brand-title font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-none tracking-[-0.03em] text-[var(--ink)]">
-              Periodic
-            </h1>
-            <p className="mt-1.5 max-w-sm text-sm text-[var(--ink-soft)] sm:text-[0.95rem]">
-              Tap an element for its atom, story, and uses.
-            </p>
-          </div>
+        <div className="relative mx-auto max-w-[1500px]">
+          <h1 className="brand-title font-display text-[clamp(1.5rem,3.5vw,2.35rem)] font-semibold leading-none tracking-[-0.03em] text-[var(--ink)]">
+            Periodic
+          </h1>
+          <p className="mt-1 max-w-sm text-sm text-[var(--ink-soft)]">
+            Tap an element for its atom, story, and uses.
+          </p>
         </div>
       </header>
 
-      <main className="relative mx-auto flex w-full max-w-[1500px] flex-1 flex-col gap-4 px-3 pb-4 sm:px-6 lg:flex-row lg:items-stretch lg:gap-5 lg:px-8 lg:pb-6">
-        <div
-          className={`min-w-0 flex-1 transition-[flex-basis] duration-300 ${
-            showPanel && !isMobile ? "lg:flex-[1.4]" : ""
-          }`}
-        >
+      <main className="relative mx-auto flex min-h-0 w-full max-w-[1500px] flex-1 flex-col gap-3 overflow-hidden px-3 py-2 sm:px-6 lg:flex-row lg:items-stretch lg:gap-5 lg:px-8">
+        <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain">
           <PeriodicTable
             selectedNumber={selected}
             filterCategory={filter}
@@ -110,25 +104,15 @@ export function PeriodicApp() {
           />
         </div>
 
-        {!isMobile && (
-          <div
-            className={`detail-shell shrink-0 overflow-hidden transition-all duration-300 ease-out ${
-              showPanel
-                ? "w-full max-w-[400px] opacity-100 xl:max-w-[440px]"
-                : "pointer-events-none w-0 max-w-0 opacity-0"
-            }`}
-          >
-            {showPanel && (
-              <div className="h-full min-h-[560px] w-[min(100%,400px)] xl:w-[440px]">
-                {detail}
-              </div>
-            )}
+        {!isMobile && showPanel && (
+          <div className="detail-shell detail-shell-fixed shrink-0 self-start">
+            {detail}
           </div>
         )}
       </main>
 
-      <footer className="relative mt-auto border-t border-[var(--line)] px-4 py-4 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-[1500px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <footer className="relative z-10 shrink-0 border-t border-[var(--line)] bg-[var(--paper)] px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[1500px] flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
           <p className="shrink-0 font-display text-sm font-semibold tracking-tight text-[var(--ink)] sm:text-base">
             Periodic
             <span className="ml-2 font-sans text-xs font-normal text-[var(--muted)]">
@@ -164,7 +148,7 @@ export function PeriodicApp() {
             <div className="flex shrink-0 justify-center pt-2.5 pb-1">
               <span className="h-1 w-10 rounded-full bg-[var(--line)]" />
             </div>
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+            <div className="min-h-0 flex-1 overflow-hidden">
               {detail}
             </div>
           </div>
