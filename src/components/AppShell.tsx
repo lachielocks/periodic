@@ -39,6 +39,15 @@ export function AppShell({
             </NavLink>
             <NavLink href="/lab" active={!!onLab}>
               Lab
+              <span
+                className={`ml-1.5 rounded-[3px] px-1 py-px font-mono text-[0.55rem] font-medium tracking-wider uppercase ${
+                  onLab
+                    ? "bg-[var(--paper)]/20 text-[var(--paper)]"
+                    : "bg-[var(--accent)]/15 text-[var(--accent)]"
+                }`}
+              >
+                Beta
+              </span>
             </NavLink>
           </nav>
         </div>
@@ -61,7 +70,7 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`rounded-sm px-3 py-1.5 font-mono text-xs tracking-wide transition-colors ${
+      className={`inline-flex items-center rounded-sm px-3 py-1.5 font-mono text-xs tracking-wide transition-colors ${
         active
           ? "bg-[var(--ink)] text-[var(--paper)]"
           : "text-[var(--muted)] hover:bg-[var(--paper-deep)] hover:text-[var(--ink)]"
