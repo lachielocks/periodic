@@ -9,7 +9,7 @@ import {
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { categoryColors, categoryLabels } from "@/lib/categories";
-import { approximateNeutrons } from "@/lib/electrons";
+import { approximateNeutrons, formatElectronShells } from "@/lib/electrons";
 import { formatKelvin, formatMass } from "@/lib/layout";
 import type { ChemicalElement } from "@/types/element";
 
@@ -120,7 +120,7 @@ export function ElementDetail({
           <PropRow label="Neutrons" value={`≈ ${neutrons}`} />
           <PropRow
             label="Electron configuration"
-            value={element.electronConfiguration}
+            value={formatElectronShells(element.atomicNumber)}
           />
           <PropRow
             label="Density"

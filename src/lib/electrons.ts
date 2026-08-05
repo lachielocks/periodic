@@ -16,7 +16,15 @@ export function electronShells(atomicNumber: number): number[] {
   return shells;
 }
 
+/** e.g. Na → "2, 8, 1" */
+export function formatElectronShells(atomicNumber: number): string {
+  return electronShells(atomicNumber).join(", ");
+}
+
 /** Approximate neutron count from mass number (rounded atomic mass − Z) */
-export function approximateNeutrons(atomicNumber: number, atomicMass: number): number {
+export function approximateNeutrons(
+  atomicNumber: number,
+  atomicMass: number
+): number {
   return Math.max(0, Math.round(atomicMass) - atomicNumber);
 }
