@@ -161,6 +161,29 @@ body {
   transform: scale(1.04);
 }
 
+.lab-tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.lab-tool-btn:hover:not(:disabled) {
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+
+.lab-tool-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { AppShell } from "@/components/AppShell";
 import { ElementDetail } from "@/components/ElementDetail";
 import {
   CategoryLegend,
@@ -80,19 +81,7 @@ export function PeriodicApp() {
   ) : null;
 
   return (
-    <div className="flex h-dvh max-h-dvh flex-col overflow-hidden bg-[var(--paper)]">
-      <header className="relative shrink-0 px-4 pb-2 pt-4 sm:px-6 sm:pt-5 lg:px-8">
-        <div className="atmosphere" aria-hidden />
-        <div className="relative mx-auto max-w-[1500px]">
-          <h1 className="brand-title font-display text-[clamp(1.5rem,3.5vw,2.35rem)] font-semibold leading-none tracking-[-0.03em] text-[var(--ink)]">
-            Periodic
-          </h1>
-          <p className="mt-1 max-w-sm text-sm text-[var(--ink-soft)]">
-            Tap an element for its atom, story, and uses.
-          </p>
-        </div>
-      </header>
-
+    <AppShell subtitle="Tap an element for its atom, story, and uses.">
       <main className="relative mx-auto flex min-h-0 w-full max-w-[1500px] flex-1 flex-col gap-3 overflow-hidden px-3 py-2 sm:px-6 lg:flex-row lg:items-stretch lg:gap-5 lg:px-8">
         <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain">
           <PeriodicTable
@@ -148,12 +137,10 @@ export function PeriodicApp() {
             <div className="flex shrink-0 justify-center pt-2.5 pb-1">
               <span className="h-1 w-10 rounded-full bg-[var(--line)]" />
             </div>
-            <div className="min-h-0 flex-1 overflow-hidden">
-              {detail}
-            </div>
+            <div className="min-h-0 flex-1 overflow-hidden">{detail}</div>
           </div>
         </>
       )}
-    </div>
+    </AppShell>
   );
 }
