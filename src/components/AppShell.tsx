@@ -30,26 +30,16 @@ export function AppShell({
             )}
           </div>
 
-          <nav
-            className="flex shrink-0 items-center gap-1 rounded-md border border-[var(--line)] bg-[var(--panel)]/80 p-1 backdrop-blur-sm"
-            aria-label="Primary"
-          >
-            <NavLink href="/" active={!onLab}>
-              Table
-            </NavLink>
-            <NavLink href="/lab" active={!!onLab}>
-              Lab
-              <span
-                className={`ml-1.5 rounded-[3px] px-1 py-px font-mono text-[0.55rem] font-medium tracking-wider uppercase ${
-                  onLab
-                    ? "bg-[var(--paper)]/20 text-[var(--paper)]"
-                    : "bg-[var(--accent)]/15 text-[var(--accent)]"
-                }`}
-              >
-                Beta
-              </span>
-            </NavLink>
-          </nav>
+          {onLab && (
+            <nav
+              className="flex shrink-0 items-center gap-1 rounded-md border border-[var(--line)] bg-[var(--panel)]/80 p-1 backdrop-blur-sm"
+              aria-label="Primary"
+            >
+              <NavLink href="/" active={false}>
+                Table
+              </NavLink>
+            </nav>
+          )}
         </div>
       </header>
 
